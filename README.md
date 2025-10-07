@@ -1,6 +1,6 @@
 # SMS Classification (NLP_MCD)
 
-This project implements a **full text‑classification pipeline** to identify SMS messages as `ham` (legitimate) or `spam`. Compared with earlier versions, the folder structure and the set of available deep models have been updated. The code downloads and prepares the dataset, balances the classes, trains classical and lightweight deep‑learning models, compares their performance, and generates visualisations of the results.
+This project implements a **full text‑classification pipeline** to identify SMS messages as `ham` (legitimate) or `spam`. The code downloads and prepares the dataset, balances the classes, trains classical and lightweight deep‑learning models, compares their performance, and generates visualisations of the results.
 
 ## Repository structure
 
@@ -38,8 +38,6 @@ NLP_MCD/
    pip install pandas numpy scikit-learn nltk imbalanced-learn matplotlib seaborn datasets tensorflow==2.* gensim
    ```
 
-   The `transformers` package is no longer required: the current version replaces the BERT model with a **compact Transformer** implemented in Keras.
-
 3. On first run the preprocessing step automatically downloads NLTK stopwords.
 
 ## Running the pipeline
@@ -52,11 +50,11 @@ python -m Project.main
 
 The workflow proceeds through the following stages:
 
-1. **Data selection.** The **SMS Spam Collection** corpus (5 574 messages) is downloaded and a random sample of 5 000 messages is drawn to reduce the size of the experiment【899904514028581†L270-L283】.
+1. **Data selection.** The **SMS Spam Collection** corpus (5 574 messages) is downloaded and a random sample of 5 000 messages is drawn to reduce the size of the experiment.
 2. **Pre‑processing.** Messages are lower‑cased, URLs, email addresses, numbers and punctuation are removed, they are tokenised and stopwords are filtered out.
-3. **Dataset balancing.** Since only around 13 % of the messages are spam, the majority class (ham) is randomly undersampled until the classes are equal. This yields ≈650 ham and 650 spam messages (1 324 examples in total)【899904514028581†L270-L303】.
+3. **Dataset balancing.** Since only around 13 % of the messages are spam, the majority class (ham) is randomly undersampled until the classes are equal. This yields ≈650 ham and 650 spam messages (1 324 examples in total).
 4. **Train–test split.** The balanced set is split into training and test sets (80/20) with stratification.
-5. **Classical models.** Texts are vectorised using TF–IDF (unigrams and bigrams) and three classifiers are trained: *logistic regression*, *linear SVM* and *random forest*【899904514028581†L270-L284】.
+5. **Classical models.** Texts are vectorised using TF–IDF (unigrams and bigrams) and three classifiers are trained: *logistic regression*, *linear SVM* and *random forest*.
 6. **Deep‑learning models.** Using fixed‑length padded sequences of word tokens, four lightweight neural networks are trained:
    - **LSTM:** a recurrent network with randomly initialised embeddings.
    - **LSTM + GloVe:** the same architecture, but embeddings are initialised with 100‑dimensional GloVe vectors (kept frozen).
@@ -67,9 +65,9 @@ The workflow proceeds through the following stages:
 
 ## Key results
 
-On this reduced and balanced dataset, the linear classifiers outperform the deep networks. In particular, **logistic regression** and the **linear SVM** achieve about 95 % accuracy and F1≈0.954【899904514028581†L270-L284】. The **random forest** trails slightly with 93 % accuracy. Both **LSTM** variants (with or without GloVe) converge to predicting every message as spam, achieving 100 % recall but low precision and accuracy of ≈0.50【899904514028581†L270-L284】. The **CNN** offers a trade‑off: 84.9 % accuracy and high recall (98 %), but precision of only 77 %. The **compact Transformer** obtains 63 % accuracy with perfect recall but many false positives【899904514028581†L270-L284】.
+On this reduced and balanced dataset, the linear classifiers outperform the deep networks. In particular, **logistic regression** and the **linear SVM** achieve about 95 % accuracy and F1≈0.954. The **random forest** trails slightly with 93 % accuracy. Both **LSTM** variants (with or without GloVe) converge to predicting every message as spam, achieving 100 % recall but low precision and accuracy of ≈0.50. The **CNN** offers a trade‑off: 84.9 % accuracy and high recall (98 %), but precision of only 77 %. The **compact Transformer** obtains 63 % accuracy with perfect recall but many false positives.
 
-These findings align with recent literature: when large corpora and pre‑trained models are available, transformer and hybrid approaches can exceed 97–99 % accuracy【899904514028581†L321-L325】. However, under data and computational constraints, linear methods with TF–IDF remain a robust and efficient choice【899904514028581†L332-L349】.
+These findings align with recent literature: when large corpora and pre‑trained models are available, transformer and hybrid approaches can exceed 97–99 % accuracy. However, under data and computational constraints, linear methods with TF–IDF remain a robust and efficient choice.
 
 ## Additional resources
 
