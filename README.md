@@ -26,7 +26,7 @@ NLP_MCD/
 │   ├── fig_balanced.png
 │   ├── fig_mean_len.png
 │   └── fig_model_perf.png
-└── README.md            # Spanish version of the documentation
+└── README.md
 ```
 
 ## Installation and dependencies
